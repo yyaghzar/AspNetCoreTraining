@@ -41,9 +41,9 @@ namespace AspNetCoreTraining
             services.AddScoped<CourseRepo>();
             services.AddScoped<EnrollmentRepo>();
 
-            services.AddSingleton<GuidGenerator>();
+            services.AddScoped<GuidGenerator>();
 
-            services.AddSingleton<GuidFactory>();
+            services.AddScoped<GuidFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +53,7 @@ namespace AspNetCoreTraining
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -64,10 +64,19 @@ namespace AspNetCoreTraining
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ASPNET CORE Training");
                 c.RoutePrefix = string.Empty;
             });
-            
+
+            app.Use(async (context, next) =>
+            {
+                context.Request.Headers.Add("X-Testing", "Yassir");
+                await next.Invoke();
+                context.Response.Cookies.Append("X-Testing", "Yassir");
+            });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            
 
             app.UseAuthorization();
 

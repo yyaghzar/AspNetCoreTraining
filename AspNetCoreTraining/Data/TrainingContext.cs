@@ -9,7 +9,7 @@ namespace AspNetCoreTraining.Data
 {
     public class TrainingContext : DbContext {
 
-        public DbSet<Student> Employees { get; set; }
+        public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
 

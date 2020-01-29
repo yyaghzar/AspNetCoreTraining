@@ -1,5 +1,6 @@
 ﻿using AspNetCoreTraining.Data.Models;
 using AspNetCoreTraining.Data.Repos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreTraining.Controllers
@@ -10,6 +11,12 @@ namespace AspNetCoreTraining.Controllers
         public StudentController(StudentRepo repo, ILogger<StudentController> logger) : base(repo)
         {
             _logger = logger;
+        }
+
+        [HttpGet("Header")]
+        public string GetHeader() {
+            var header = Request.Headers["X-Testing"];
+            return header;
         }
 
     }

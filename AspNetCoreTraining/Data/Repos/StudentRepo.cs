@@ -9,6 +9,8 @@ namespace AspNetCoreTraining.Data.Repos
     public class StudentRepo:BaseRepo<Student,TrainingContext>
     {
         public StudentRepo(TrainingContext context) : base(context) { }
+
+        
         
     }
 }
